@@ -1,0 +1,40 @@
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "quoteProps": "as-needed",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "embeddedLanguageFormatting": "auto",
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "importOrder": [
+    "^react$",
+    "^react-dom$",
+    "^@tanstack/react-query$",
+    "^@tanstack/react-form$",
+    "^@tanstack/react-router$",
+    "^@/contexts/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/services/(.*)$",
+    "^@/utils/(.*)$",
+    "^@/config/(.*)$",
+    "^@/components/ui/(.*)$",
+    "^@/components/(.*)$",
+    "^@/app/(.*)$",
+    "^@/(.*)$",
+    "^[./]",
+    "^@tailwindcss/vite$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderGroupNamespaceSpecifiers": true,
+  "tailwindConfig": "./tailwind.config.js"
+}
