@@ -2,12 +2,12 @@ import { createRoot } from 'react-dom/client';
 
 import { StrictMode } from 'react';
 
-import { AuthProvider } from '@/contexts/AuthContext';
+import { AuthProvider } from '@/contexts/AuthContext.tsx';
 
 import App from './App.tsx';
-import { Providers } from './app/provider';
-import './app/styles/tailwind.css';
 import './index.css';
+import { Providers } from './provider';
+import './styles/tailwind.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

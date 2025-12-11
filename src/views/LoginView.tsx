@@ -26,7 +26,6 @@ export default function LoginView({ onLoggedIn }: LoginViewProps) {
   const form = useForm({
     defaultValues,
     validators: {
-      onMount: loginFormSchema,
       onChange: loginFormSchema,
       onSubmit: loginFormSchema,
     },
@@ -54,6 +53,12 @@ export default function LoginView({ onLoggedIn }: LoginViewProps) {
             <Input
               type="email"
               label="Email"
+              value={field.state.value}
+              error={
+                field.state.meta.isTouched
+                  ? field.state.meta.errors[0]?.message || ''
+                  : ''
+              }
               placeholder="Enter your email"
               className="w-full rounded border p-4"
               onChange={(event) => field.handleChange(event.target.value)}
@@ -67,6 +72,12 @@ export default function LoginView({ onLoggedIn }: LoginViewProps) {
             <Input
               type="password"
               label="Password"
+              value={field.state.value}
+              error={
+                field.state.meta.isTouched
+                  ? field.state.meta.errors[0]?.message || ''
+                  : ''
+              }
               placeholder="Enter your password"
               className="w-full rounded border p-4"
               onChange={(event) => field.handleChange(event.target.value)}
@@ -75,20 +86,31 @@ export default function LoginView({ onLoggedIn }: LoginViewProps) {
         />
 
         {loginError && (
-          <div className="text-sm text-red-500">{loginError.message}</div>
+          <div className="mt-1">
+            <Text variant="danger">{loginError.message}</Text>
+          </div>
         )}
 
         <form.Subscribe
           selector={(state) =>
-            [state.canSubmit, state.isSubmitting, state.isValid] as const
+            [
+              state.canSubmit,
+              state.isSubmitting,
+              state.isValid,
+              state.isPristine,
+            ] as const
           }
-          children={([canSubmit, isSubmitting, isValid]) => (
+          children={([canSubmit, isSubmitting, isValid, isPristine]) => (
             <Button
               type="submit"
               variant="primary"
               className="w-full"
               disabled={
-                !canSubmit || isSubmitting || !isValid || loginIsLoading
+                isPristine ||
+                !canSubmit ||
+                isSubmitting ||
+                !isValid ||
+                loginIsLoading
               }
             >
               {loginIsLoading ? 'Logging in...' : 'Login'}

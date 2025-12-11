@@ -7,7 +7,6 @@ import {
 } from 'react';
 
 import { type User, authApi } from '@/services/auth';
-
 import { logout } from '@/utils/authUtils';
 import { tokenStorage } from '@/utils/tokenStorage';
 

@@ -1,10 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { useAuth } from '@/hooks/useAuth';
-
 import { type LoginResponse, authApi } from '@/services/auth';
 
-import { tokenStorage } from '@/utils/tokenStorage';
+import { tokenStorage } from '../utils/tokenStorage';
 
 interface UseLoginOptions {
   onSuccess?: (data: LoginResponse) => void;

@@ -4,9 +4,16 @@ import { Text } from '../Text/Text';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  error?: string;
 }
 
-export function Input({ className, label = '', id, ...props }: InputProps) {
+export function Input({
+  className,
+  label = '',
+  error = '',
+  id,
+  ...props
+}: InputProps) {
   return (
     <div>
       {!!label && (
@@ -25,6 +32,12 @@ export function Input({ className, label = '', id, ...props }: InputProps) {
         )}
         {...props}
       />
+
+      {!!error && (
+        <Text variant="danger" size="sm">
+          {error}
+        </Text>
+      )}
     </div>
   );
 }

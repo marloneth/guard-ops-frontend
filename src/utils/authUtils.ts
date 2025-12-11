@@ -1,6 +1,6 @@
 import { authApi } from '@/services/auth';
 
-import { tokenStorage } from '@/utils/tokenStorage';
+import { tokenStorage } from './tokenStorage';
 
 let isRefreshing = false;
 let refreshSubscribers: ((token: string) => void)[] = [];

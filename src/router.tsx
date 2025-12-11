@@ -3,11 +3,12 @@ import { RootRoute, Route, Router } from '@tanstack/react-router';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { PublicRoute } from '@/components/ProtectedRoute';
 
-import Home from './routes';
+import Home from './routes/_authenticated';
+import AuthenticatedLayout from './routes/_authenticated/_layout';
+import DashboardLayout from './routes/_authenticated/dashboard/_layout';
+import UsersIndex from './routes/_authenticated/dashboard/users';
+import UserDetail from './routes/_authenticated/dashboard/users/$userId';
 import RootLayout from './routes/_layout';
-import DashboardLayout from './routes/dashboard/_layout';
-import UsersIndex from './routes/dashboard/users';
-import UserDetail from './routes/dashboard/users/$userId';
 import Login from './routes/login';
 
 // 1. Root route
@@ -19,15 +20,6 @@ const rootRoute = new RootRoute({
 const routeTree = rootRoute.addChildren([
   new Route({
     getParentRoute: () => rootRoute,
-    path: '/',
-    component: () => (
-      <ProtectedRoute>
-        <Home />
-      </ProtectedRoute>
-    ),
-  }),
-  new Route({
-    getParentRoute: () => rootRoute,
     path: '/login',
     component: () => (
       <PublicRoute>
@@ -37,10 +29,23 @@ const routeTree = rootRoute.addChildren([
   }),
   new Route({
     getParentRoute: () => rootRoute,
+    path: '/',
+    component: () => (
+      <ProtectedRoute>
+        <AuthenticatedLayout>
+          <Home />
+        </AuthenticatedLayout>
+      </ProtectedRoute>
+    ),
+  }),
+  new Route({
+    getParentRoute: () => rootRoute,
     path: '/dashboard',
     component: () => (
       <ProtectedRoute>
-        <DashboardLayout />
+        <AuthenticatedLayout>
+          <DashboardLayout />
+        </AuthenticatedLayout>
       </ProtectedRoute>
     ),
   }),
@@ -49,7 +54,9 @@ const routeTree = rootRoute.addChildren([
     path: '/dashboard/users',
     component: () => (
       <ProtectedRoute>
-        <UsersIndex />
+        <AuthenticatedLayout>
+          <UsersIndex />
+        </AuthenticatedLayout>
       </ProtectedRoute>
     ),
   }),
@@ -58,7 +65,9 @@ const routeTree = rootRoute.addChildren([
     path: '/dashboard/users/$userId',
     component: () => (
       <ProtectedRoute>
-        <UserDetail />
+        <AuthenticatedLayout>
+          <UserDetail />
+        </AuthenticatedLayout>
       </ProtectedRoute>
     ),
   }),
