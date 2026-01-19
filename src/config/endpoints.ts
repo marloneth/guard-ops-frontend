@@ -53,6 +53,15 @@ export const API_ENDPOINTS = {
     INFO: '/api/system/info',
     METRICS: '/api/system/metrics',
   },
+
+  // Role endpoints
+  ROLES: {
+    LIST: '/api/roles',
+    GET: (id: number) => `/api/roles/${id}`,
+    CREATE: '/api/roles',
+    UPDATE: (id: number) => `/api/roles/${id}`,
+    DELETE: (id: number) => `/api/roles/${id}`,
+  },
 } as const;
 
 // Type helpers for endpoint paths

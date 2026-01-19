@@ -2,12 +2,15 @@ import { RootRoute, Route, Router } from '@tanstack/react-router';
 
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { PublicRoute } from '@/components/ProtectedRoute';
+import { PermissionGuard } from '@/components/PermissionGuard/index';
+import { PERMISSIONS } from '@/constants/roles';
 
 import Home from './routes/_authenticated';
 import AuthenticatedLayout from './routes/_authenticated/_layout';
 import DashboardLayout from './routes/_authenticated/dashboard/_layout';
 import UsersIndex from './routes/_authenticated/dashboard/users';
 import UserDetail from './routes/_authenticated/dashboard/users/$userId';
+import RolesIndex from './routes/_authenticated/dashboard/roles';
 import RootLayout from './routes/_layout';
 import Login from './routes/login';
 
@@ -67,6 +70,19 @@ const routeTree = rootRoute.addChildren([
       <ProtectedRoute>
         <AuthenticatedLayout>
           <UserDetail />
+        </AuthenticatedLayout>
+      </ProtectedRoute>
+    ),
+  }),
+  new Route({
+    getParentRoute: () => rootRoute,
+    path: '/dashboard/roles',
+    component: () => (
+      <ProtectedRoute>
+        <AuthenticatedLayout>
+          <PermissionGuard permissions={[PERMISSIONS.USER_CREATE, PERMISSIONS.USER_UPDATE]} requireAll={false}>
+            <RolesIndex />
+          </PermissionGuard>
         </AuthenticatedLayout>
       </ProtectedRoute>
     ),

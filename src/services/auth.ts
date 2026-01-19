@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from '@/config/endpoints';
+
 import type { LoginFormState } from '@/types/loginForm';
 
 import { apiClient } from './apiClient';
@@ -12,7 +13,7 @@ export interface User {
   id: string;
   email: string;
   name?: string;
-  role?: string;
+  role?: 'ADMIN' | 'SUPERVISOR' | 'GUARD';
 }
 
 export interface AuthState {
